@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sreejith Koganti - Digital Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom base styles - Dark Theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark Gray background */
+            color: #d1d5db; /* Light Gray text */
+        }
+
+        /* Custom styles for section headings - Dark Theme */
+        .section-title {
+            @apply text-3xl font-bold text-center text-gray-100 mb-16 relative pb-4 z-10;
+        }
+        /* Underline effect for section titles - Cyan Accent */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #22d3ee; /* Cyan accent (cyan-400) */
+            border-radius: 2px;
+        }
+
+        /* Style for cards - Dark Theme */
+        .content-card {
+            @apply bg-gray-800 rounded-xl shadow-lg border border-gray-700 transition-transform duration-300 hover:scale-[1.02] hover:shadow-cyan-900/30 overflow-hidden flex flex-col;
+        }
+        .card-content {
+             @apply p-6 flex-grow;
+        }
+        .card-image {
+             @apply w-full h-40 object-cover opacity-80;
+        }
+
+        /* Style for skill items (cards) - Dark Theme */
+        .skill-item {
+            @apply bg-gray-800/90 backdrop-blur-sm p-4 rounded-lg border border-gray-700 flex items-center space-x-3 transition-colors duration-300 hover:bg-gray-700/90 hover:border-cyan-600 z-10;
+        }
+        .skill-icon {
+             @apply text-cyan-400 text-xl w-6 text-center;
+        }
+        .skill-text {
+            @apply text-gray-200 font-medium text-sm;
+        }
+
+
+         /* Profile image style */
+        .hero-profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid #374151; /* Medium gray border */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+            object-fit: cover;
+        }
+
+        /* Smooth scroll behavior (fallback) */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header styling - Dark Theme */
+        header {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        header.scrolled {
+             background-color: rgba(17, 24, 39, 0.9);
+             backdrop-filter: blur(10px);
+             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Hide scrollbar utility */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Ensure alternating section backgrounds work with dark theme */
+        .bg-white { background-color: #1f2937; }
+        .bg-gray-50 { background-color: #111827; }
+
+        /* Subtle Background Pattern for Skills Section */
+        #skills {
+            position: relative;
+            background-color: #111827;
+        }
+        #skills::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cg fill='%231f2937' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 0h20v1H0V0zm20 2v20h-1V2h1zm-2 18H0v1h18v-1zm-1-2H1v-1h16v1zM0 2h1v16H0V2zm18 16h1v2h-1v-2zm-1 0h-1v1h1v-1zM2 0h1v1H2V0zm1 0h1v1H3V0zm1 0h1v1H4V0zm1 0h1v1H5V0zm1 0h1v1H6V0zm1 0h1v1H7V0zm1 0h1v1H8V0zm1 0h1v1H9V0zm1 0h1v1h-1V0zm1 0h1v1h-1V0zm1 0h1v1h-1V0zm1 0h1v1h-1V0zm1 0h1v1h-1V0zm1 0h1v1h-1V0zm1 0h1v1h-1V0zM1 2h16v1H1V2zm16 1H1v1h16V3zM1 4h16v1H1V4zm16 1H1v1h16V5zM1 6h16v1H1V6zm16 1H1v1h16V7zM1 8h16v1H1V8zm16 1H1v1h16V9zM1 10h16v1H1v-1zm16 1H1v1h16v-1zM1 12h16v1H1v-1zm16 1H1v1h16v-1zM1 14h16v1H1v-1zm16 1H1v1h16v-1z'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        #skills .container {
+            position: relative;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body class="text-gray-300">
+    <header id="main-header" class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md shadow-md">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold text-cyan-400 nav-link">Sreejith Koganti</a>
+            <div class="space-x-4 hidden md:block" id="desktop-nav">
+                 <a href="#about" class="text-gray-300 hover:text-cyan-400 transition duration-300 px-2 py-1 rounded nav-link">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition duration-300 px-2 py-1 rounded nav-link">Skills</a>
+                <a href="#experience" class="text-gray-300 hover:text-cyan-400 transition duration-300 px-2 py-1 rounded nav-link">Experience</a>
+                <a href="#education" class="text-gray-300 hover:text-cyan-400 transition duration-300 px-2 py-1 rounded nav-link">Education</a>
+                <a href="#achievements" class="text-gray-300 hover:text-cyan-400 transition duration-300 px-2 py-1 rounded nav-link">Achievements</a>
+                <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition duration-300 px-2 py-1 rounded nav-link">Contact</a>
+            </div>
+            <button class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-gray-400 text-xl"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section id="hero" class="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white pt-28 pb-20 text-center">
+        <div class="container mx-auto px-6">
+             <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/IMG_0073%203.jpg"
+                  alt="Sreejith Koganti Profile Picture"
+                  class="hero-profile-image mb-6"
+                  onerror="this.onerror=null; this.src='https://placehold.co/180x180/374151/E5E7EB?text=Profile+Pic+Error';">
+             <h1 class="text-5xl font-extrabold mb-3 text-gray-100">SREEJITH KOGANTI</h1>
+            <p class="text-2xl font-light mb-6 text-cyan-300">Exploring the Intersection of Business, Technology, and Entrepreneurship</p>
+             <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">
+                A driven and versatile student pursuing multi-disciplinary BBA programs with a passion for digital innovation, analytics, and finance. Committed to continuous learning, collaboration, and making a tangible impact.
+            </p>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">About Me</h2>
+             <div class="max-w-3xl mx-auto text-center text-lg text-gray-300 leading-relaxed">
+                 <p>
+                    Hello! I’m Sreejith Koganti, currently enriching my academic portfolio through a diverse and challenging curriculum at prestigious institutions like IIM Bangalore, where I’m immersed in Digital Business & Entrepreneurship, Deakin University for Business Analytics, and SCMS Bangalore focusing on Finance. At 18, my academic and professional journey is characterized by a relentless pursuit of knowledge and an eagerness to apply interdisciplinary insights to solve real-world problems.
+                </p>
+                <p class="mt-4">
+                    My passion extends beyond classrooms; I am committed to building strong, impactful connections and leveraging my growing skill set to facilitate collective success. Known for my dedication and the ability to innovate under pressure, I consistently seek opportunities to exceed expectations and drive meaningful change. Through collaborative projects and community involvement, I aim to contribute to and lead initiatives that champion innovation, efficiency, and inclusivity.
+                </p>
+                <p class="mt-4">
+                    As I navigate through these formative years, I remain dedicated to using my skills in analytics, strategic thinking, and leadership to make a significant impact in the business world and beyond, aspiring to become a catalyst for sustainable growth and development.
+                </p>
+             </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Skills</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="skill-item">
+                    <i class="fas fa-users skill-icon"></i>
+                    <span class="skill-text">Management Skills</span>
+                </div>
+                 <div class="skill-item">
+                    <i class="fas fa-lightbulb skill-icon"></i>
+                    <span class="skill-text">Creativity</span>
+                </div>
+                 <div class="skill-item">
+                    <i class="fas fa-chart-line skill-icon"></i>
+                    <span class="skill-text">Digital Marketing</span>
+                </div>
+                 <div class="skill-item">
+                    <i class="fas fa-handshake skill-icon"></i>
+                    <span class="skill-text">Negotiation & Networking</span>
+                </div>
+                 <div class="skill-item">
+                    <i class="fas fa-brain skill-icon"></i>
+                    <span class="skill-text">Critical Thinking & Leadership</span>
+                </div>
+                 <div class="skill-item">
+                    <i class="fas fa-file-alt skill-icon"></i>
+                    <span class="skill-text">MS Office Proficiency</span>
+                </div>
+                 <div class="skill-item">
+                    <i class="fas fa-video skill-icon"></i>
+                    <span class="skill-text">Video Editing</span>
+                </div>
+                 <div class="skill-item">
+                    <i class="fas fa-briefcase skill-icon"></i>
+                    <span class="skill-text">Business Acumen & Analytics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="content-card">
+                    <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/Screenshot%202025-04-20%20at%2012.02.35%E2%80%AFPM.png"
+                         alt="KBC Infrastructure Project"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Experience';">
+                    <div class="card-content">
+                        <h3 class="text-xl font-semibold text-gray-100 mb-1">Site Coordinator</h3>
+                        <p class="text-lg font-medium text-cyan-400 mb-1">KBC Infrastructures Pvt. Ltd.</p>
+                        <p class="text-sm text-gray-400 mb-3"><i class="fas fa-calendar-alt mr-1"></i> Mar 2023 - Jun 2023</p>
+                        <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 pl-2">
+                            <li>Contributed to the "Construction of Rail under Bridge in Guntur - Vijayawada Line" project.</li>
+                            <li>Project under the Ministry of Railways, Govt of India.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-card">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/Screenshot%202025-04-20%20at%2012.09.14%E2%80%AFPM.png"
+                         alt="CollegeHive Startup"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Experience';">
+                    <div class="card-content">
+                        <h3 class="text-xl font-semibold text-gray-100 mb-1">Intern</h3>
+                         <p class="text-lg font-medium text-cyan-400 mb-1">CollegeHive</p>
+                         <p class="text-sm text-gray-400 mb-3"><i class="fas fa-calendar-alt mr-1"></i> 2024 - Present</p>
+                        <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 pl-2">
+                            <li>Developing study materials and notes for college students within a startup environment.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-card">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/Screenshot%202025-04-20%20at%2012.11.40%E2%80%AFPM.png"
+                         alt="Volunteering at Sathguru Sri Narayana Teertha Trust"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Experience';">
+                    <div class="card-content">
+                        <h3 class="text-xl font-semibold text-gray-100 mb-1">Volunteer</h3>
+                         <p class="text-lg font-medium text-cyan-400 mb-1">SATHGURU SRI NARAYANA TEERTHA TRUST</p>
+                         <p class="text-sm text-gray-400 mb-3"><i class="fas fa-calendar-alt mr-1"></i> Oct 2019 - Mar 2023</p>
+                        <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 pl-2">
+                            <li>Distributed essentials to stranded migrant workers during COVID-19 lockdowns.</li>
+                            <li>Assisted in running free English and computer classes for rural children.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="content-card">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/1920_utown.jpg"
+                         alt="NUS UTown"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Experience';">
+                    <div class="card-content">
+                        <h3 class="text-xl font-semibold text-gray-100 mb-1">Participant</h3>
+                         <p class="text-lg font-medium text-cyan-400 mb-1">The Achievers Programme at NUS</p>
+                         <p class="text-sm text-gray-400 mb-3"><i class="fas fa-calendar-alt mr-1"></i> Nov 2023</p>
+                        <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 pl-2">
+                            <li>Completed an AI program led by Asst. Prof. Arnab Bhattacharyya (NUS School of Computing).</li>
+                            <li>Gained foundational knowledge of AI and its future impact on the job market.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Academic Journey</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                 <div class="content-card text-center">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/maxresdefault-2.jpg"
+                         alt="IIM Bangalore Campus"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Education';">
+                    <div class="card-content">
+                         <i class="fas fa-university text-3xl text-cyan-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-gray-100">Indian Institute of Management Bangalore</h3>
+                        <p class="text-md text-gray-300">BBA - Digital Business & Entrepreneurship</p>
+                        <p class="text-sm text-gray-400">Class of 2027</p>
+                    </div>
+                </div>
+                 <div class="content-card text-center">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/1634799429phpSgIZWe.jpeg"
+                         alt="Deakin University Campus"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Education';">
+                     <div class="card-content">
+                         <i class="fas fa-university text-3xl text-cyan-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-gray-100">Deakin University Australia</h3>
+                        <p class="text-md text-gray-300">BBA - Business Analytics</p>
+                        <p class="text-sm text-gray-400">Class of 2028</p>
+                    </div>
+                </div>
+                 <div class="content-card text-center">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/23843487-809053445944334-5129579778624941649-n-cropped-cropped-1529065030-1596542617-1607325201.jpg"
+                         alt="SCMS Bangalore Campus"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Education';">
+                     <div class="card-content">
+                         <i class="fas fa-university text-3xl text-cyan-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-gray-100">Symbiosis Centre for Management Studies Bangalore</h3>
+                        <p class="text-md text-gray-300">BBA - Finance</p>
+                        <p class="text-sm text-gray-400">Class of 2028</p>
+                    </div>
+                </div>
+                 <div class="content-card text-center lg:col-span-3">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/hqdefault.jpg"
+                         alt="Next Gen International School"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x200/374151/E5E7EB?text=Education';">
+                     <div class="card-content">
+                         <i class="fas fa-school text-3xl text-cyan-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-gray-100">Next Gen International School</h3>
+                        <p class="text-md text-gray-300">High School: Class 12 (85%) & Class 10 (82%)</p>
+                        <p class="text-sm text-gray-400">Graduated 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title">Highlights & Achievements</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-center">
+                <div class="content-card">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/Randonneuring_Basics_-_BUMSONTHESADDLE_Audax_India_Bangalore_mob.jpg.webp"
+                         alt="Randonneuring Cycling Event"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Achievement';">
+                    <div class="card-content">
+                         <i class="fas fa-bicycle text-3xl text-cyan-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-gray-100 mb-2">Youngest Randonneur</h3>
+                        <p class="text-sm text-gray-300">Completed a 100km cycling event in 7 hours, achieving the title in India.</p>
+                    </div>
+                </div>
+                <div class="content-card">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/2024-10-11T013631Z_2017726860_MT1USATODAY24457004_RTRMADP_3_NBA-PRESEASON-LOS-ANGELES-LAKERS-AT-MILWAUKEE-BUCKS-1729514163.jpg.webp"
+                         alt="Basketball game action"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Achievement';">
+                    <div class="card-content">
+                         <i class="fas fa-basketball-ball text-3xl text-cyan-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-gray-100 mb-2">Basketball Captaincy</h3>
+                        <p class="text-sm text-gray-300">Led school team to inter-school victory & CBSE cluster semi-finals.</p>
+                    </div>
+                </div>
+                 <div class="content-card">
+                     <img src="https://assets.onecompiler.app/43fgz2bv4/43fgz2qyp/images-2.jpeg"
+                         alt="Swimming competition action"
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/E5E7EB?text=Achievement';">
+                     <div class="card-content">
+                         <i class="fas fa-swimmer text-3xl text-cyan-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-gray-100 mb-2">National Level Swimmer</h3>
+                        <p class="text-sm text-gray-300">Represented state at 66th National School Games (Gold & Silver at state level).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-16 bg-black text-gray-400">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-white mb-8">Get In Touch</h2>
+            <p class="max-w-xl mx-auto mb-8 text-gray-500"> Interested in collaborating or have any questions? Feel free to reach out!
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 mb-8">
+                <div class="flex items-center">
+                    <i class="fas fa-phone fa-fw mr-2 text-cyan-400"></i>
+                    <a href="tel:+916305995332" class="hover:text-cyan-300 transition duration-300">+91 6305995332</a>
+                </div>
+                <div class="flex items-center">
+                     <i class="fas fa-envelope fa-fw mr-2 text-cyan-400"></i>
+                     <a href="mailto:sreejithkoganti.2024@scmsbengaluru.siu.edu.in" class="hover:text-cyan-300 transition duration-300 break-all">sreejithkoganti.2024@scmsbengaluru.siu.edu.in</a>
+                </div>
+                 <div class="flex items-center">
+                     <i class="fas fa-envelope fa-fw mr-2 text-cyan-400"></i>
+                     <a href="mailto:sreejithk24@iimb.ac.in" class="hover:text-cyan-300 transition duration-300 break-all">sreejithk24@iimb.ac.in</a>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt fa-fw mr-2 text-cyan-400"></i>
+                    <span>Bengaluru, India</span>
+                </div>
+            </div>
+             <p class="text-sm text-gray-600 mt-10">&copy; <span id="year"></span> Sreejith Koganti. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Add shadow to header on scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll functionality
+        document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default anchor click behavior
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // Calculate offset for the sticky header
+                    const headerOffset = document.getElementById('main-header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
